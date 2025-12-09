@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Mi Equipo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="css/mucama.css">
+</head>
+<body>
+    <!-- TEAM VIEW - Vista colaborativa de otras mucamas -->
+    <!-- Backend: No hay endpoint específico, usa GET /api/rooms para filtrar todas las habitaciones -->
+
+    <header class="mobile-header">
+        <div class="d-flex justify-content-between align-items-center px-3 py-2">
+            <h5 class="mb-0 page-title">Mi Equipo</h5>
+            <a href="index.html" class="btn btn-sm btn-outline-light">Volver</a>
+        </div>
+    </header>
+
+    <main class="mobile-content">
+        <div class="p-3">
+            <div class="alert alert-info mb-3">
+                <strong>👥 Colaboración:</strong><br>
+                Aquí puedes ver las habitaciones asignadas a tus compañeras para coordinar el trabajo.
+            </div>
+
+            <!-- Lista de mucamas y sus habitaciones -->
+            <div id="teamList"></div>
+            
+            <div id="emptyState" class="text-center py-5 d-none">
+                <p class="text-muted">No hay información del equipo disponible</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="index.html" class="bottom-nav-item">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L2 8.207V13.5A1.5 1.5 0 0 0 3.5 15h9a1.5 1.5 0 0 0 1.5-1.5V8.207l.646.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.707 1.5ZM13 7.207V13.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V7.207l5-5 5 5Z"/>
+            </svg>
+            <span>Inicio</span>
+        </a>
+        <a href="incidents.html" class="bottom-nav-item">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            </svg>
+            <span>Incidencias</span>
+        </a>
+        <a href="qr-scan.html" class="bottom-nav-item">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M0 0h6v6H0V0zm1 1v4h4V1H1zm6-1h3v3H7V0zm0 4h3v3H7V4zM1 7h4v4H1V7zm6 0h3v3H7V7zm0 4h3v3H7v-3z"/>
+            </svg>
+            <span>Escanear</span>
+        </a>
+        <a href="team.html" class="bottom-nav-item active">
+            <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/>
+            </svg>
+            <span>Equipo</span>
+        </a>
+    </nav>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/mucama-team.js"></script>
+</body>
+</html>

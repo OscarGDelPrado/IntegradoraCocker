@@ -1,0 +1,189 @@
+/* ======================================
+   LOGIN.CSS - Pantalla de Login
+   Diseño Elegante y Minimalista Pastel
+   ====================================== */
+
+body {
+    background: linear-gradient(135deg, #E6F3FF 0%, #F0E6FF 50%, #FFE6F0 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Container principal */
+.container-fluid {
+    padding: var(--spacing-lg);
+}
+
+/* Card de login elegante */
+.card {
+    border-radius: var(--radius-xl);
+    border: none;
+    box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.95);
+    overflow: hidden;
+}
+
+.card-body {
+    padding: var(--spacing-2xl) var(--spacing-xl);
+}
+
+/* Header del login */
+.card-body .text-center {
+    margin-bottom: var(--spacing-xl);
+}
+
+.card-body h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: var(--spacing-sm);
+}
+
+.card-body h2::before {
+    content: '🏨';
+    margin-right: var(--spacing-sm);
+    -webkit-text-fill-color: initial;
+}
+
+.card-body .text-muted {
+    font-size: 1rem;
+    color: var(--text-secondary) !important;
+    margin-bottom: 0;
+}
+
+/* Formulario */
+#loginForm {
+    margin-top: var(--spacing-xl);
+}
+
+.form-label {
+    font-weight: 500;
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-sm);
+    font-size: 0.95rem;
+}
+
+.form-control {
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    border: 2px solid var(--border-color);
+    background: var(--bg-light);
+    font-size: 0.95rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-control::placeholder {
+    color: var(--text-muted);
+}
+
+.form-control:focus {
+    box-shadow: 0 0 0 4px rgba(167, 199, 231, 0.15);
+    border-color: var(--primary-color);
+    background: var(--bg-white);
+}
+
+/* Espaciado entre inputs */
+.mb-3 {
+    margin-bottom: var(--spacing-lg) !important;
+}
+
+/* Botón de login */
+.btn-primary {
+    padding: 1rem 2rem;
+    font-weight: 600;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    margin-top: var(--spacing-md);
+}
+
+.btn-primary:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(167, 199, 231, 0.3);
+}
+
+.btn-primary:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+/* Alert de error */
+.alert-danger {
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-lg);
+    font-size: 0.9rem;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Footer con info de usuarios */
+.card-body .mt-4 {
+    margin-top: var(--spacing-xl) !important;
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border-color);
+}
+
+.card-body small {
+    display: block;
+    line-height: 1.6;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+}
+
+.card-body small:first-of-type {
+    font-weight: 500;
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .card-body {
+        padding: var(--spacing-xl) var(--spacing-lg);
+    }
+    
+    .card-body h2 {
+        font-size: 1.75rem;
+    }
+    
+    .form-control {
+        padding: 0.875rem 1rem;
+        font-size: 0.9rem;
+    }
+    
+    .btn-primary {
+        padding: 0.875rem 1.5rem;
+        font-size: 0.95rem;
+    }
+}
+
+/* Animación de entrada */
+.card {
+    animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,72 @@
+{
+  "name": "Hotel Manager - Sistema de Gestión Hotelera",
+  "short_name": "Hotel Manager",
+  "description": "Sistema de gestión hotelera con soporte offline para mucamas y recepción",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#FAFBFC",
+  "theme_color": "#A7C7E7",
+  "categories": ["business", "productivity", "utilities"],
+  "lang": "es-ES",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-192.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Mis Habitaciones",
+      "short_name": "Habitaciones",
+      "description": "Ver habitaciones asignadas",
+      "url": "/mucama/index.html",
+      "icons": [
+        {
+          "src": "/icon-192.svg",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Reportar Incidencia",
+      "short_name": "Incidencias",
+      "description": "Reportar nueva incidencia",
+      "url": "/mucama/incidents.html",
+      "icons": [
+        {
+          "src": "/icon-192.svg",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Dashboard Recepción",
+      "short_name": "Recepción",
+      "description": "Panel de control de recepción",
+      "url": "/recepcion/index.html",
+      "icons": [
+        {
+          "src": "/icon-192.svg",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ],
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "features": [
+    "cross-origin-isolated"
+  ]
+}

@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  database:
+    image: mysql:8
+    container_name: hotel-database
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: hoteldb
+    ports:
+      - "3307:3306"
+    volumes:
+      - hotel-db-volume:/var/lib/mysql
+    networks:
+      - hotel-net
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # Spring Boot Backend
+  backend:
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
+    container_name: hotel-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://database:3306/hoteldb?createDatabaseIfNotExist=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_DATABASE_PLATFORM: org.hibernate.dialect.MySQLDialect
+      JWT_SECRET: mySecretKeyForHotelManagementSystemThatIsVeryLongAndSecure12345
+      JWT_EXPIRATION: 86400000
+    ports:
+      - "8081:8080"
+    networks:
+      - hotel-net
+    depends_on:
+      database:
+        condition: service_healthy
+    restart: unless-stopped
+
+  # Frontend (PWA)
+  frontend:
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: hotel-frontend
+    ports:
+      - "3000:80"
+    networks:
+      - hotel-net
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  hotel-db-volume:
+    driver: local
+
+networks:
+  hotel-net:
+    driver: bridge

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Habitaciones</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="css/recepcion.css">
+</head>
+<body>
+    <!-- ROOMS MANAGEMENT - CRUD completo -->
+    <!-- Backend: GET/POST/PUT/DELETE /api/rooms -->
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h4>🏨 Hotel Manager</h4>
+            <p class="mb-0" id="userNameSidebar"></p>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-item">
+                <span class="nav-icon">📊</span> Dashboard
+            </a>
+            <a href="rooms.html" class="nav-item active">
+                <span class="nav-icon">🚪</span> Habitaciones
+            </a>
+            <a href="incidents.html" class="nav-item">
+                <span class="nav-icon">⚠️</span> Incidencias
+            </a>
+            <a href="staff.html" class="nav-item">
+                <span class="nav-icon">👥</span> Personal
+            </a>
+            <a href="assignments.html" class="nav-item">
+                <span class="nav-icon">📋</span> Asignaciones
+            </a>
+            <a href="qr-codes.html" class="nav-item">
+                <span class="nav-icon">📱</span> Códigos QR
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="btn btn-outline-light w-100" id="logoutBtn">Cerrar Sesión</button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="top-bar">
+            <h3>Gestión de Habitaciones</h3>
+            <div>
+                <button class="btn btn-warning me-2" id="dailyResetBtn">🔄 Reinicio Diario</button>
+                <button class="btn btn-primary" id="newRoomBtn">+ Nueva Habitación</button>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" id="searchRoom" placeholder="Buscar habitación...">
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select" id="filterStatus">
+                            <option value="">Todos los estados</option>
+                            <option value="CLEAN">Limpia</option>
+                            <option value="DIRTY">Sucia</option>
+                            <option value="OCCUPIED">Ocupada</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select class="form-select" id="filterBuilding">
+                            <option value="">Todos los edificios</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <button class="btn btn-outline-primary w-100" id="clearFilters">Limpiar Filtros</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rooms Table -->
+        <div class="card">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>Número</th>
+                                <th>Edificio</th>
+                                <th>Piso</th>
+                                <th>Estado</th>
+                                <th>Asignada a</th>
+                                <th>Última Actualización</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="roomsTableBody">
+                            <tr><td colspan="7" class="text-center">Cargando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Nueva/Editar Habitación -->
+    <div class="modal fade" id="roomModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="roomModalTitle">Nueva Habitación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="roomForm">
+                        <input type="hidden" id="roomId">
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Número *</label>
+                            <input type="text" class="form-control" id="roomNumber" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Edificio *</label>
+                            <select class="form-select" id="roomBuilding" required>
+                                <option value="">Seleccione edificio</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Piso *</label>
+                            <input type="number" class="form-control" id="roomFloor" min="1" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label class="form-label">Estado *</label>
+                            <select class="form-select" id="roomStatus" required>
+                                <option value="CLEAN">Limpia</option>
+                                <option value="DIRTY">Sucia</option>
+                                <option value="OCCUPIED">Ocupada</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100">Guardar</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/recepcion-rooms.js"></script>
+</body>
+</html>

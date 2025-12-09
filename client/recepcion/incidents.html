@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Incidencias</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="css/recepcion.css">
+</head>
+<body>
+    <!-- INCIDENTS MANAGEMENT -->
+    <!-- Backend: GET /api/incidents, PATCH /api/incidents/{id}/resolve -->
+
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h4>🏨 Hotel Manager</h4>
+            <p class="mb-0" id="userNameSidebar"></p>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-item">
+                <span class="nav-icon">📊</span> Dashboard
+            </a>
+            <a href="rooms.html" class="nav-item">
+                <span class="nav-icon">🚪</span> Habitaciones
+            </a>
+            <a href="incidents.html" class="nav-item active">
+                <span class="nav-icon">⚠️</span> Incidencias
+            </a>
+            <a href="staff.html" class="nav-item">
+                <span class="nav-icon">👥</span> Personal
+            </a>
+            <a href="assignments.html" class="nav-item">
+                <span class="nav-icon">📋</span> Asignaciones
+            </a>
+            <a href="qr-codes.html" class="nav-item">
+                <span class="nav-icon">📱</span> Códigos QR
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="btn btn-outline-light w-100" id="logoutBtn">Cerrar Sesión</button>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="top-bar">
+            <h3>Gestión de Incidencias</h3>
+            <div class="d-flex gap-2 align-items-center">
+                <span class="badge bg-warning text-dark" id="openCount">0 Abiertas</span>
+                <span class="badge bg-success" id="resolvedCount">0 Resueltas</span>
+                <button class="btn btn-sm btn-danger" id="forceCleanIncidentsBtn" title="Forzar limpieza de incidencias antiguas">
+                    🧹 Limpiar Incidencias
+                </button>
+            </div>
+        </div>
+
+        <!-- Filters -->
+        <div class="card mb-3">
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <select class="form-select" id="filterStatus">
+                            <option value="">Todos los estados</option>
+                            <option value="OPEN" selected>Abiertas</option>
+                            <option value="RESOLVED">Resueltas</option>
+                        </select>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" class="form-control" id="searchIncident" placeholder="Buscar...">
+                    </div>
+                    <div class="col-md-4">
+                        <button class="btn btn-outline-primary w-100" id="clearFilters">Limpiar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Incidents Table -->
+        <div class="card">
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Habitación</th>
+                                <th>Descripción</th>
+                                <th>Reportado por</th>
+                                <th>Estado</th>
+                                <th>Fecha</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody id="incidentsTableBody">
+                            <tr><td colspan="7" class="text-center">Cargando...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Resolver Incidencia -->
+    <div class="modal fade" id="resolveModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Resolver Incidencia</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="resolveForm">
+                        <input type="hidden" id="resolveIncidentId">
+                        <div class="mb-3">
+                            <label class="form-label">Notas de Resolución</label>
+                            <textarea class="form-control" id="resolutionNotes" rows="4" 
+                                      placeholder="Describe cómo se resolvió la incidencia..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">Marcar como Resuelta</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Detalle Incidencia -->
+    <div class="modal fade" id="detailModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Detalle de Incidencia</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="incidentDetailContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/recepcion-incidents.js"></script>
+</body>
+</html>

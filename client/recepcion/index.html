@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recepción - Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/common.css">
+    <link rel="stylesheet" href="css/recepcion.css">
+</head>
+<body>
+    <!-- DESKTOP-FIRST UI FOR RECEPTION -->
+    <!-- Backend: GET /api/rooms, /api/incidents -->
+
+    <!-- Sidebar Elegante -->
+    <div class="sidebar">
+        <div class="sidebar-header">
+            <h4>Hotel Manager</h4>
+            <p class="mb-0" id="userNameSidebar"></p>
+        </div>
+        <nav class="sidebar-nav">
+            <a href="index.html" class="nav-item active">
+                <span class="nav-icon">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M2 13.5V7h1v6.5a.5.5 0 0 0 .5.5h9a.5.5 0 0 0 .5-.5V7h1v6.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5zm11-11V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+                        <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+                    </svg>
+                </span> Dashboard
+            </a>
+            <a href="rooms.html" class="nav-item">
+                <span class="nav-icon">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8 1a2 2 0 0 1 2 2v4H6V3a2 2 0 0 1 2-2zm3 6V3a3 3 0 0 0-6 0v4a2 2 0 0 0-2 2v5a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/>
+                    </svg>
+                </span> Habitaciones
+            </a>
+            <a href="incidents.html" class="nav-item">
+                <span class="nav-icon">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg>
+                </span> Incidencias
+            </a>
+            <a href="staff.html" class="nav-item">
+                <span class="nav-icon">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z"/>
+                    </svg>
+                </span> Personal
+            </a>
+            <a href="assignments.html" class="nav-item">
+                <span class="nav-icon">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M2.5 3.5a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm0 3a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm0 3a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11zm0 3a.5.5 0 0 1 0-1h11a.5.5 0 0 1 0 1h-11z"/>
+                    </svg>
+                </span> Asignaciones
+            </a>
+            <a href="qr-codes.html" class="nav-item">
+                <span class="nav-icon">
+                    <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                        <path d="M0 0h6v6H0V0zm1 1v4h4V1H1zm6-1h3v3H7V0zm0 4h3v3H7V4zM1 7h4v4H1V7zm6 0h3v3H7V7zm0 4h3v3H7v-3z"/>
+                        <path d="M2 2h2v2H2V2zm8 0h2v2h-2V2zm0 6h2v2h-2V8zM2 8h2v2H2V8zm6 4h2v2H8v-2z"/>
+                    </svg>
+                </span> Códigos QR
+            </a>
+        </nav>
+        <div class="sidebar-footer">
+            <button class="btn btn-outline-light w-100" id="logoutBtn">
+                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16" style="vertical-align: middle; margin-right: 6px;">
+                    <path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
+                    <path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
+                </svg>
+                Cerrar Sesión
+            </button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <h3>Dashboard Principal</h3>
+            <div class="d-flex gap-2 align-items-center">
+                <span class="badge bg-primary" id="lastUpdate">Actualizando...</span>
+                <button class="btn btn-sm btn-primary" id="refreshBtn">🔄 Actualizar</button>
+            </div>
+        </div>
+
+        <!-- KPIs Cards Pastel -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-3">
+                <div class="card kpi-card kpi-success">
+                    <div class="card-body">
+                        <div class="kpi-icon">
+                            <svg width="40" height="40" fill="currentColor" viewBox="0 0 16 16" style="color: #38A169;">
+                                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                            </svg>
+                        </div>
+                        <div class="kpi-value" id="kpiClean">0</div>
+                        <div class="kpi-label">Habitaciones Limpias</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card kpi-card kpi-warning">
+                    <div class="card-body">
+                        <div class="kpi-icon">
+                            <svg width="40" height="40" fill="currentColor" viewBox="0 0 16 16" style="color: #D69E2E;">
+                                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                            </svg>
+                        </div>
+                        <div class="kpi-value" id="kpiDirty">0</div>
+                        <div class="kpi-label">Pendientes de Limpieza</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card kpi-card kpi-danger">
+                    <div class="card-body">
+                        <div class="kpi-icon">
+                            <svg width="40" height="40" fill="currentColor" viewBox="0 0 16 16" style="color: #E53E3E;">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                            </svg>
+                        </div>
+                        <div class="kpi-value" id="kpiOccupied">0</div>
+                        <div class="kpi-label">Habitaciones Bloqueadas</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card kpi-card kpi-info">
+                    <div class="card-body">
+                        <div class="kpi-icon">
+                            <svg width="40" height="40" fill="currentColor" viewBox="0 0 16 16" style="color: #2C5282;">
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                                <path d="m8.93 6.588-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                            </svg>
+                        </div>
+                        <div class="kpi-value" id="kpiIncidents">0</div>
+                        <div class="kpi-label">Incidencias Abiertas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Charts Row -->
+        <div class="row g-3 mb-4">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Estado de Habitaciones</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="roomsChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Incidencias por Severidad</h5>
+                    </div>
+                    <div class="card-body">
+                        <canvas id="incidentsChart" width="400" height="200"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Incidencias Recientes</h5>
+                        <a href="incidents.html" class="btn btn-sm btn-outline-primary">Ver Todas</a>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table table-hover mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Habitación</th>
+                                        <th>Descripción</th>
+                                        <th>Severidad</th>
+                                        <th>Estado</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="recentIncidents">
+                                    <tr><td colspan="4" class="text-center">Cargando...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Habitaciones por Mucama</h5>
+                        <a href="assignments.html" class="btn btn-sm btn-outline-primary">Gestionar</a>
+                    </div>
+                    <div class="card-body">
+                        <div id="maidStats"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script type="module" src="js/recepcion-dashboard.js"></script>
+</body>
+</html>
