@@ -2,8 +2,13 @@
    CONFIG.JS - Configuración Global
    ====================================== */
 
-// Backend API URL - Conecta con Spring Boot (SecurityConfig permite CORS desde localhost:5173)
-export const API_URL = 'http://localhost:8081/api';
+// Backend API URL - Se adapta automáticamente al entorno
+// En desarrollo local: localhost:8081
+// En producción: usa el mismo host del frontend
+const isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+export const API_URL = isLocalhost 
+    ? 'http://localhost:8081/api'
+    : `http://${window.location.hostname}:8081/api`;
 
 // Endpoints del Backend (Spring Boot Controllers)
 export const ENDPOINTS = {
