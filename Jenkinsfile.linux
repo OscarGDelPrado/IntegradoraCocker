@@ -1,0 +1,72 @@
+pipeline {
+    agent any
+
+    stages {
+        // Parar los servicios que ya existen o en todo caso hacer caso omiso
+        stage('Parando los servicios...') {
+            steps {
+                sh '''
+                    docker compose down || true
+                '''
+            }
+        }
+
+        // Eliminar las imágenes creadas por ese proyecto
+        stage('Eliminando imágenes anteriores...') {
+            steps {
+                sh '''
+                    IMAGES=$(docker images --filter "label=com.docker.compose.project=integradora" -q)
+                    if [ -n "$IMAGES" ]; then
+                        docker rmi -f $IMAGES || echo "No se pudieron eliminar algunas imágenes"
+                    else
+                        echo "No hay imágenes por eliminar"
+                    fi
+                '''
+            }
+        }
+
+        // Del recurso SCM configurado en el job, jala el repo
+        stage('Obteniendo actualización...') {
+            steps {
+                checkout scm
+            }
+        }
+
+        // Construir y levantar los servicios
+        stage('Construyendo y desplegando servicios...') {
+            steps {
+                sh '''
+                    docker compose up --build -d
+                '''
+            }
+        }
+
+        // Verificar estado de los servicios
+        stage('Verificando servicios...') {
+            steps {
+                sh '''
+                    echo "Estado de los contenedores:"
+                    docker compose ps
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Pipeline ejecutado con éxito'
+            echo 'Aplicación disponible en:'
+            echo '  - Frontend: http://localhost:3000'
+            echo '  - Backend: http://localhost:8081'
+        }
+
+        failure {
+            echo 'Hubo un error al ejecutar el pipeline'
+            sh 'docker compose logs --tail=50'
+        }
+
+        always {
+            echo 'Pipeline finalizado'
+        }
+    }
+}
