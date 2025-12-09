@@ -6,7 +6,7 @@ pipeline {
         stage('Parando los servicios...') {
             steps {
                 sh '''
-                    docker-compose down || true
+                    docker compose down || true
                 '''
             }
         }
@@ -36,7 +36,7 @@ pipeline {
         stage('Construyendo y desplegando servicios...') {
             steps {
                 sh '''
-                    docker-compose up --build -d
+                    docker compose up --build -d
                 '''
             }
         }
@@ -46,7 +46,7 @@ pipeline {
             steps {
                 sh '''
                     echo "Estado de los contenedores:"
-                    docker-compose ps
+                    docker compose ps
                 '''
             }
         }
@@ -62,7 +62,7 @@ pipeline {
 
         failure {
             echo 'Hubo un error al ejecutar el pipeline'
-            sh 'docker-compose logs --tail=50'
+            sh 'docker compose logs --tail=50'
         }
 
         always {

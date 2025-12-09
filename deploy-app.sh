@@ -28,7 +28,7 @@ else
 fi
 
 echo -e "${BLUE}Construyendo y levantando servicios...${NC}"
-docker-compose up --build -d
+docker compose up --build -d
 
 echo -e "${GREEN}=========================================="
 echo "¡Despliegue completado!"
